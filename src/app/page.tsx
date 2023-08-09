@@ -1,95 +1,102 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+'use client';
+
+import styles from './page.module.css';
+import { Card, CardBody, CardHeader, Divider, Heading, Text, Stack, Box, List, ListItem, ListIcon } from '@chakra-ui/react';
+import { MdNumbers } from 'react-icons/md';
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      <Stack className={styles.stack} direction="column" spacing={4}>
+        <Card>
+          <CardHeader>
+            <Heading size="xl">Introduction</Heading>
+          </CardHeader>
+          <CardBody>
+            <Stack direction="column" spacing={4} divider={<Divider orientation="horizontal" />}>
+              <Box>
+                <Heading size="md">What is this?</Heading>
+                <Text size="sm">
+                  The purpose of this website is to help me learn Next.js and Chakra.
+                  Right now I'm enjoying how it looks and feels.
+                  It's not too complicated to learn, either.
+                  Check out the games on this website!
+                </Text>
+              </Box>
+              <Box>
+                <Heading size="md">When and where is this?</Heading>
+                <Text size="sm">
+                  This is here and this is now.
+                </Text>
+              </Box>
+              <Box>
+                <Heading size="md">Why is this?</Heading>
+                <Text size="sm">
+                  Why not? I enjoy it.
+                </Text>
+              </Box>
+            </Stack>
+          </CardBody>
+        </Card>
+        <Card>
+          <CardHeader>
+            <Heading size="xl">Games</Heading>
+          </CardHeader>
+          <CardBody>
+            <Stack direction="column" spacing={4} divider={<Divider orientation="horizontal" />}>
+              <Box>
+                <Heading size="md">Games?</Heading>
+                <Text size="sm">
+                  There are a variety of games on this website for you to play!
+                  All of these are simply implementations of popular games that already exist.
+                </Text>
+              </Box>
+              <Box>
+                <Heading size="md">Sudoku</Heading>
+                <Text size="sm">
+                  Your challenge: to place digits (1-9) in the grid such that:
+                </Text>
+                  <List>
+                    <ListItem>
+                      <ListIcon as={MdNumbers} />
+                      Each row does not contain the same digit twice.
+                    </ListItem>
+                    <ListItem>
+                      <ListIcon as={MdNumbers} />
+                      Each column does not contain the same digit twice.
+                    </ListItem>
+                    <ListItem>
+                      <ListIcon as={MdNumbers} />
+                      Each 3x3 box of numbers does not contain the same digit twice.
+                    </ListItem>
+                  </List>
+                <Text>
+                  You can choose how many numbers are given to you as hints at the start.
+                  Can you solve the sudoku?
+                </Text>
+              </Box>
+              <Box>
+                <Heading size="md">Nim</Heading>
+                <Text size="sm">
+                  In this game you play against an artificial intelligence!
+                  On each round, the person playing takes away one or more stones from a single pile.
+                  The first person who cannot take any more stones away loses!
+                  The AI will always win when it can. Can you beat it at least once?
+                </Text>
+              </Box>
+              <Box>
+                <Heading size="md">Sliding puzzle</Heading>
+                <Text size="sm">
+                  You are given a grid of numbered blocks, with one empty space.
+                  Your challenge is to rearrange the blocks into ascending order, by sliding blocks into the empty space.
+                  Blocks must increase along the row and down the grid.
+                  You can choose the size of the grid, but be careful - it gets difficult quickly!
+                </Text>
+              </Box>
+            </Stack>
+          </CardBody>
+        </Card>
+      </Stack>
     </main>
-  )
-}
+  );
+};
