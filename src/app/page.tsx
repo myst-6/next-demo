@@ -81,7 +81,8 @@ export default function Home() {
                   In this game you play against an artificial intelligence!
                   On each round, the person playing takes away one or more stones from a single pile.
                   The first person who cannot take any more stones away loses!
-                  The AI will always win when it can. Can you beat it at least once?
+                  The AI will always win when it gets the chance. 
+                  Can you beat it?
                 </Text>
               </Box>
               <Box>
