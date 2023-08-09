@@ -18,8 +18,8 @@ export default function Home() {
                 <Heading size="md">What is this?</Heading>
                 <Text size="sm">
                   The purpose of this website is to help me learn Next.js and Chakra.
-                  Right now I'm enjoying how it looks and feels.
-                  It's not too complicated to learn, either.
+                  Right now I&apos;m enjoying how it looks and feels.
+                  It&apos;s not too complicated to learn, either.
                   Check out the games on this website!
                 </Text>
               </Box>
