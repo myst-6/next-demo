@@ -5,7 +5,7 @@ This is a sample project I made today in order to practice using Next.js and Cha
 
 ## Link
 
-The website can be viewed [Here](https://next-demo-bice-eight.vercel.app/sudoku)
+The website can be viewed [Here](https://next-demo-bice-eight.vercel.app/)
 
 ## Features
 
