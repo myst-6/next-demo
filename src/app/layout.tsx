@@ -11,6 +11,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <title>Next Demo!</title>
+      </head>
       <body>
         <ChakraProvider>
           <Header />
