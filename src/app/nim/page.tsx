@@ -45,7 +45,7 @@ export default function Nim() {
     } else {
       setComputerMove([0, 0]);
     }
-  }, [isPlayer]);
+  }, [isPlayer, sizes]);
 
   function reset() {
     location.reload();

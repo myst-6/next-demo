@@ -2,7 +2,7 @@
 
 import styles from './page.module.css';
 import {Card, CardBody, Box, Text, SimpleGrid, Icon, CardHeader, Switch, FormLabel, FormControl, useBoolean, Popover, PopoverTrigger, PopoverContent, PopoverArrow, PopoverCloseButton, PopoverHeader, PopoverBody, Button, CardFooter} from '@chakra-ui/react';
-import { useState, createElement, useEffect, useMemo } from 'react';
+import { useState, createElement, useEffect, useMemo, useCallback } from 'react';
 import {
   PiNumberZeroBold, PiNumberOneBold, PiNumberTwoBold, PiNumberThreeBold, PiNumberFourBold, PiNumberFiveBold, PiNumberSixBold, PiNumberSevenBold, PiNumberEightBold, PiNumberNineBold,
   PiNumberCircleZero, PiNumberCircleOne, PiNumberCircleTwo, PiNumberCircleThree, PiNumberCircleFour, PiNumberCircleFive, PiNumberCircleSix, PiNumberCircleSeven, PiNumberCircleEight, PiNumberCircleNine
@@ -56,20 +56,19 @@ export default function Sudoku() {
   const [won, setWon] = useState(false);
   const [numbers, setNumbers] = useState(Array(81).fill(0));
   const [incorrect, setIncorrect] = useState(new Set<number>());
-
-  const rowdx = Array.from({length: 9}, (_, i) => Array.from({length: 9}, (_, j) => {
-    return 9 * i + j;
-  }));
-  const coldx = Array.from({length: 9}, (_, i) => Array.from({length: 9}, (_, j) => {
-    return i + 9 * j;
-  }));
-  const sqdx = Array.from({length: 9}, (_, i) => Array.from({length: 9}, (_, j) => {
-    let row = 3 * (i / 3 | 0) + (j / 3 | 0);
-    let col = 3 * (i % 3) + (j % 3);
-    return 9 * row + col;
-  }));
   
-  function findIncorrect(numbers: number[]) {
+  const findIncorrect = useCallback(function findIncorrect(numbers: number[]) {
+    const rowdx = Array.from({length: 9}, (_, i) => Array.from({length: 9}, (_, j) => {
+      return 9 * i + j;
+    }));
+    const coldx = Array.from({length: 9}, (_, i) => Array.from({length: 9}, (_, j) => {
+      return i + 9 * j;
+    }));
+    const sqdx = Array.from({length: 9}, (_, i) => Array.from({length: 9}, (_, j) => {
+      let row = 3 * (i / 3 | 0) + (j / 3 | 0);
+      let col = 3 * (i % 3) + (j % 3);
+      return 9 * row + col;
+    }));
     function helper(group: number[]) {
       const map = new Map<number,number>();
       const dup = new Set<number>();
@@ -87,7 +86,7 @@ export default function Sudoku() {
       for (const idx of helper(group)) ans.add(idx);
       return ans;
     }, new Set<number>());
-  }
+  }, []);
 
   useEffect(() => {
     setNumbers(Array.from({length: 81}, (_, i) => {
@@ -104,7 +103,7 @@ export default function Sudoku() {
         setWon(true);
       }
     }
-  }, [numbers]);
+  }, [numbers, findIncorrect]);
 
   function update(idx: number, change: number) {
     setNumbers(numbers => numbers.map((number, i) => i === idx ? change : number));
@@ -114,22 +113,22 @@ export default function Sudoku() {
     location.reload();
   } 
 
-  const board = Array(81).fill(0);
-  const digits = [1,2,3,4,5,6,7,8,9];
-  for (let i=0; i<9; i++) for (let j=0; j<9; j++) if (Math.random() < 0.5) {
-    [digits[i], digits[j]] = [digits[j], digits[i]];
-  }
-  function solve(idx: number) {
-    if (idx == 81) return true;
-    for (const digit of digits) {
-      board[idx] = digit;
-      if (findIncorrect(board).size > 0) continue;
-      if (solve(idx + 1)) return true;
-    }
-    board[idx] = 0;
-    return false;
-  }
   useEffect(() => {
+    const board = Array(81).fill(0);
+    const digits = [1,2,3,4,5,6,7,8,9];
+    for (let i=0; i<9; i++) for (let j=0; j<9; j++) if (Math.random() < 0.5) {
+      [digits[i], digits[j]] = [digits[j], digits[i]];
+    }
+    function solve(idx: number) {
+      if (idx == 81) return true;
+      for (const digit of digits) {
+        board[idx] = digit;
+        if (findIncorrect(board).size > 0) continue;
+        if (solve(idx + 1)) return true;
+      }
+      board[idx] = 0;
+      return false;
+    }
     solve(0);
     const indices = [...Array(81).keys()];
     for (let i=0; i<81; i++) for (let j=0; j<81; j++) if (Math.random() < 0.5) {
@@ -142,7 +141,7 @@ export default function Sudoku() {
       hints[idx] = board[idx] + 10;
     }
     setNumbers(hints);
-  }, []);
+  }, [findIncorrect]);
   
   return (
     <main className={styles.main}>
