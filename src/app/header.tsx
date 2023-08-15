@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import styles from './header.module.css';
 import { Button, Stack } from '@chakra-ui/react';
-import { MdGridOn, MdHome, MdStackedBarChart, MdSwapHoriz } from 'react-icons/md';
+import { MdGridOn, MdHome, MdStackedBarChart, MdSwapHoriz, MdAssignment } from 'react-icons/md';
 import { IconType } from 'react-icons';
 import { createElement } from 'react';
 
@@ -33,6 +33,7 @@ export default function Header() {
         <HeaderItem name="Sudoku" path="/sudoku" icon={MdGridOn} />
         <HeaderItem name="Nim" path="/nim" icon={MdStackedBarChart} />
         <HeaderItem name="Sliding Puzzle" path="/sliding" icon={MdSwapHoriz} />
+        <HeaderItem name="Feedback" path="/feedback" icon={MdAssignment} />
       </Stack>
     );
 };
