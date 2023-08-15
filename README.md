@@ -9,4 +9,4 @@ The website can be viewed [Here](https://next-demo-bice-eight.vercel.app/)
 
 ## Features
 
-There is a home page, a page where you can play Nim against an AI, and a page where you can play Sudoku.
+There is a home page, a page where you can play Nim against an AI, and a page where you can play Sudoku. There is also a feedback form to practice using react-hook-forms with chakra.
